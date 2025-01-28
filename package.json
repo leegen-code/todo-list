@@ -20,5 +20,8 @@
     "to-do-list-application"
   ],
   "author": "leegen-code",
-  "license": "LGPL-3.0-or-later"
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
 }

@@ -1,0 +1,24 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "A todo list",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "task",
+    "tasks",
+    "todo",
+    "list",
+    "todo-list",
+    "to-do",
+    "to-do-list",
+    "to-do-lists",
+    "to-do-list-app",
+    "to-do-list-application"
+  ],
+  "author": "leegen-code",
+  "license": "LGPL-3.0-or-later"
+}

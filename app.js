@@ -8,16 +8,24 @@ const app = express();
 const port = 3000;
 const db = new sqlite3.Database(':memory:');
 
+// Serve static files from the 'public' directory
 app.use(express.static('public'));
+
+// Parse incoming JSON requests
 app.use(bodyParser.json());
-app.use(morgan('dev')); // Add verbose logging
+
+// Add verbose logging
+app.use(morgan('dev'));
 
 // Initialize database
 db.serialize(() => {
+    // Create 'tasks' table with columns: id, text, and completed
     db.run("CREATE TABLE tasks (id INTEGER PRIMARY KEY AUTOINCREMENT, text TEXT, completed INTEGER)");
 });
 
 // CRUD operations
+
+// Fetch all tasks
 app.get('/tasks', (req, res) => {
     console.log('Fetching all tasks');
     db.all("SELECT * FROM tasks", (err, rows) => {
@@ -30,6 +38,7 @@ app.get('/tasks', (req, res) => {
     });
 });
 
+// Add a new task
 app.post('/tasks', (req, res) => {
     const { text } = req.body;
     console.log(`Adding new task: ${text}`);
@@ -43,6 +52,7 @@ app.post('/tasks', (req, res) => {
     });
 });
 
+// Update an existing task
 app.put('/tasks/:id', (req, res) => {
     const { id } = req.params;
     const { text, completed } = req.body;
@@ -57,6 +67,7 @@ app.put('/tasks/:id', (req, res) => {
     });
 });
 
+// Delete a task
 app.delete('/tasks/:id', (req, res) => {
     const { id } = req.params;
     console.log(`Deleting task ${id}`);
@@ -70,10 +81,12 @@ app.delete('/tasks/:id', (req, res) => {
     });
 });
 
+// Serve the main HTML file
 app.get('/', (req, res) => {
   res.sendFile(PUBLIC_HTML + '/' + 'todolist.html');
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`To-do-list app listening at http://localhost:${port}`);
 });
